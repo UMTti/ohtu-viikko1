@@ -41,7 +41,7 @@ public class VarastoTest {
     @Test
     public void negLaitto(){
         varasto.lisaaVarastoon(-1);
-        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+        assertEquals(2, varasto.getSaldo(), vertailuTarkkuus);
     }
     
     @Test
