@@ -2,4 +2,9 @@
 target/*
 OhtuVarasto/target/*
 /ohtu2015/viikko2/Verkkokauppa1/target/
+<<<<<<< HEAD
 /ohtu2015/viikko5/TyhjaProjekti/target/
+=======
+/ohtu2015/viikko4/MockitoDemo/target/
+/ohtu2015/viikko4/LyyrakorttiMockito/target/
+>>>>>>> 7ff90b54c663bcacffaea27086e900759f07614c

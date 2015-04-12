@@ -17,6 +17,19 @@ public class Main {
         Pankki pankki = ctx.getBean(Pankki.class);
         Viitegeneraattori viitegen = ctx.getBean(Viitegeneraattori.class);
         Kauppa kauppa = new Kauppa(varasto, pankki, viitegen);
+        if(true == true){
+            if(true == true){
+                if(true == true){
+                    System.out.println("No olipa true");
+                }
+            }
+        }
+        System.out.println("eka");
+        System.out.println("toka");
+        System.out.println("kolmas");
+        System.out.println("neljäs");
+        System.out.println("viides");
+        System.out.println("kuures");
 
         // kauppa hoitaa yhden asiakkaan kerrallaan seuraavaan tapaan:
         kauppa.aloitaAsiointi();
@@ -25,6 +38,12 @@ public class Main {
         kauppa.lisaaKoriin(3);
         kauppa.poistaKorista(1);
         kauppa.tilimaksu("Pekka Mikkola", "1234-12345");
+        System.out.println("eka");
+        System.out.println("toka");
+        System.out.println("kolmas");
+        System.out.println("neljäs");
+        System.out.println("viides");
+        System.out.println("kuures");
 
         // seuraava asiakas
         kauppa.aloitaAsiointi();
