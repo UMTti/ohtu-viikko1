@@ -1,9 +1,9 @@
 package ohtu;
 
 public class TennisGame {
-    
-    private int m_score1 = 0;
-    private int m_score2 = 0;
+
+    private int scores1 = 0;
+    private int scores2 = 0;
     private String player1Name;
     private String player2Name;
 
@@ -13,68 +13,79 @@ public class TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if (playerName == "player1")
-            m_score1 += 1;
-        else
-            m_score2 += 1;
+        if (playerName.equals("player1")) {
+            scores1 += 1;
+        } else {
+            scores2 += 1;
+        }
     }
 
     public String getScore() {
-        String score = "";
-        int tempScore=0;
-        if (m_score1==m_score2)
-        {
-            switch (m_score1)
-            {
-                case 0:
-                        score = "Love-All";
-                    break;
-                case 1:
-                        score = "Fifteen-All";
-                    break;
-                case 2:
-                        score = "Thirty-All";
-                    break;
-                case 3:
-                        score = "Forty-All";
-                    break;
-                default:
-                        score = "Deuce";
-                    break;
-                
-            }
+        String result = "";
+        int tempScore = 0;
+        if (scores1 == scores2) {
+            result = switchTasapeli();
+        } else if (scores1 >= 4 || scores2 >= 4) {
+            result = switchVoitto();
+        } else {
+            result = switchEro(scores1) + "-" + switchEro(scores2);
         }
-        else if (m_score1>=4 || m_score2>=4)
-        {
-            int minusResult = m_score1-m_score2;
-            if (minusResult==1) score ="Advantage player1";
-            else if (minusResult ==-1) score ="Advantage player2";
-            else if (minusResult>=2) score = "Win for player1";
-            else score ="Win for player2";
+        return result;
+    }
+
+    public String switchEro(int singleScore) {
+        String result = "";
+        switch (singleScore) {
+            case 0:
+                result += "Love";
+                break;
+            case 1:
+                result += "Fifteen";
+                break;
+            case 2:
+                result += "Thirty";
+                break;
+            case 3:
+                result += "Forty";
+                break;
         }
-        else
-        {
-            for (int i=1; i<3; i++)
-            {
-                if (i==1) tempScore = m_score1;
-                else { score+="-"; tempScore = m_score2;}
-                switch(tempScore)
-                {
-                    case 0:
-                        score+="Love";
-                        break;
-                    case 1:
-                        score+="Fifteen";
-                        break;
-                    case 2:
-                        score+="Thirty";
-                        break;
-                    case 3:
-                        score+="Forty";
-                        break;
-                }
-            }
+        return result;
+    }
+
+    public String switchTasapeli() {
+        String result = "";
+        switch (scores1) {
+            case 0:
+                result = "Love-All";
+                break;
+            case 1:
+                result = "Fifteen-All";
+                break;
+            case 2:
+                result = "Thirty-All";
+                break;
+            case 3:
+                result = "Forty-All";
+                break;
+            default:
+                result = "Deuce";
+                break;
         }
-        return score;
+        return result;
+    }
+
+    public String switchVoitto() {
+        int difference = scores1 - scores2;
+        String result = "";
+        if (difference == 1) {
+            result = "Advantage player1";
+        } else if (difference == -1) {
+            result = "Advantage player2";
+        } else if (difference >= 2) {
+            result = "Win for player1";
+        } else {
+            result = "Win for player2";
+        }
+        return result;
     }
 }

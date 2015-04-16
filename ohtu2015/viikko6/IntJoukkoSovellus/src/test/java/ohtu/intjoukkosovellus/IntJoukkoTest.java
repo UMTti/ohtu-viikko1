@@ -42,11 +42,11 @@ public class IntJoukkoTest {
         assertFalse(joukko.kuuluu(3));
         assertEquals(1, joukko.mahtavuus());
     }
-    
+
     @Test
     public void palautetaanOikeaTaulukko() {
         int[] odotettu = {3, 55, 99};
-        
+
         joukko.lisaa(55);
         joukko.poista(10);
         joukko.lisaa(99);
@@ -55,11 +55,10 @@ public class IntJoukkoTest {
         Arrays.sort(vastaus);
         assertArrayEquals(odotettu, vastaus);
     }
-    
-    
+
     @Test
-    public void toimiiKasvatuksenJalkeen(){
-        int[] lisattavat = {1,2,4,5,6,7,8,9,11,12,13,14};
+    public void toimiiKasvatuksenJalkeen() {
+        int[] lisattavat = {1, 2, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14};
         for (int luku : lisattavat) {
             joukko.lisaa(luku);
         }
@@ -69,9 +68,65 @@ public class IntJoukkoTest {
         assertFalse(joukko.kuuluu(11));
         assertEquals(13, joukko.mahtavuus());
     }
-    
+
     @Test
-    public void toStringToimii(){
+    public void toStringToimii() {
         assertEquals("{10, 3}", joukko.toString());
     }
+
+    @Test
+    public void toStringYhelle() {
+        IntJoukko uusi = new IntJoukko();
+        uusi.lisaa(1);
+        assertEquals("{1}", uusi.toString());
+    }
+
+    @Test
+    public void toStringNollalle() {
+        IntJoukko uusi = new IntJoukko();
+        assertEquals("{}", uusi.toString());
+    }
+
+    @Test
+    public void poistaOlematon() {
+        IntJoukko uusi = new IntJoukko();
+        assertEquals(false, uusi.poista(1));
+    }
+
+    @Test
+    public void kapasiteettiNeg() {
+        try {
+            IntJoukko uusi = new IntJoukko(-1, 5);
+            assert false;
+        } catch (IndexOutOfBoundsException e) {
+            assert true;
+        }
+    }
+
+    @Test
+    public void kasvatusNeg() {
+        try {
+            IntJoukko uusi = new IntJoukko(5, -1);
+            assert false;
+        } catch (IndexOutOfBoundsException e) {
+            assert true;
+        }
+    }
+    
+    @Test
+    public void leikkaus(){
+        IntJoukko uusi = new IntJoukko(5, 5);
+        uusi.lisaa(3);
+        IntJoukko x = IntJoukko.leikkaus(uusi, joukko);
+        assertEquals("{3}", x.toString());
+    }
+    
+    @Test 
+    public void erotus(){
+        IntJoukko uusi = new IntJoukko(5, 5);
+        uusi.lisaa(3);
+        IntJoukko x = IntJoukko.erotus(joukko, uusi);
+        assertEquals("{10}", x.toString());
+    }
+    
 }
