@@ -9,10 +9,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class OstoksenSuoritusTest {
-    PankkiFasaadi pankki = PankkiFasaadi.getInstance();
+    PankkiFasaadi pankki = new PankkiFasaadi();
     PankkiFasaadi hylkaavaPankki = teeHylkaavaPankki();
-    ToimitusjarjestelmaFasaadi toimitusJarjestelma = ToimitusjarjestelmaFasaadi.getInstance();
-    Varasto varasto = Varasto.getInstance();
+    ToimitusjarjestelmaFasaadi toimitusJarjestelma = new ToimitusjarjestelmaFasaadi();
+    Varasto varasto = new Varasto();
     
     long tuoteId1;
     long tuoteId2;
@@ -22,6 +22,7 @@ public class OstoksenSuoritusTest {
     String nimi;
     String osoite;
     String luottokortti;
+    
 
     OstoksenSuoritus ostoksenSuoritus;
     
@@ -43,7 +44,7 @@ public class OstoksenSuoritusTest {
     
     @Test
     public void josMaksuOnnistuuKoriTyhjenee() {
-        ostoksenSuoritus = new OstoksenSuoritus(nimi, osoite, luottokortti, kori);
+        ostoksenSuoritus = new OstoksenSuoritus(nimi, osoite, luottokortti, kori, pankki, toimitusJarjestelma, varasto);
         ostoksenSuoritus.suorita();
 
         assertEquals(0, kori.ostokset().size());
@@ -53,13 +54,13 @@ public class OstoksenSuoritusTest {
     
     @Test
     public void josMaksuOnnistuuPankinRajapintaaKaytetty() {
-        ostoksenSuoritus = new OstoksenSuoritus(nimi, osoite, luottokortti, kori);
+        ostoksenSuoritus = new OstoksenSuoritus(nimi, osoite, luottokortti, kori, pankki, toimitusJarjestelma, varasto);
         ostoksenSuoritus.suorita();       
     }   
 
     @Test
     public void josMaksuOnnistuuToiRajmituksenapintaaKaytetty() {
-        ostoksenSuoritus = new OstoksenSuoritus(nimi, osoite, luottokortti, kori);
+        ostoksenSuoritus = new OstoksenSuoritus(nimi, osoite, luottokortti, kori, pankki, toimitusJarjestelma, varasto);
         ostoksenSuoritus.suorita();       
     }             
 
@@ -67,13 +68,11 @@ public class OstoksenSuoritusTest {
      
     @Test
     public void josPankkiEiHyvaksyMaksuaPalautetaanFalseToimitustaEiTehda() {        
-        ostoksenSuoritus = new OstoksenSuoritus(nimi, osoite, luottokortti, kori);
+        ostoksenSuoritus = new OstoksenSuoritus(nimi, osoite, luottokortti, kori, pankki, toimitusJarjestelma, varasto);
         ostoksenSuoritus.setPankki(hylkaavaPankki);
- 
-        
+    
         assertFalse( ostoksenSuoritus.suorita() );
-        
-        // assertSomething
+               // assertSomething
     } 
     
     // epäonnistuessa kori säilyy ennallaan

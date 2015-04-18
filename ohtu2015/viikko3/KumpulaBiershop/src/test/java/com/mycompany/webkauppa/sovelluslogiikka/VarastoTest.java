@@ -11,8 +11,7 @@ public class VarastoTest {
 
     @Before
     public void setUp() {
-	Varasto.resetInstance();
-	varasto = Varasto.getInstance();
+	varasto = new Varasto();
     }
 
     @Test

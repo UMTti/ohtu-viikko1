@@ -7,13 +7,13 @@ public class PankkiFasaadi {
 
     private static PankkiFasaadi instance;
 
-    public static PankkiFasaadi getInstance() {
+    /*public static PankkiFasaadi getInstance() {
         if (instance == null) {
             instance = new PankkiFasaadi();
         }
 
         return instance;
-    }
+    }*/
 
     public PankkiFasaadi() {
         maksut = new ArrayList<String>();

@@ -9,9 +9,9 @@ public abstract class TuoteDAO {
 //        return TuoteDAOHibernate.getInstance();
 //    }
     
-    public static TuoteDAO inMemory(){
+    /*public static TuoteDAO inMemory(){
         return TuoteDAOInMemory.getInMemoryDAO();
-    }
+    }*/
 
     public abstract List<Tuote> findAll();
 

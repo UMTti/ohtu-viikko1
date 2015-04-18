@@ -19,12 +19,17 @@ public class TuotteetJSON extends HttpServlet {
         List<Tuote> tuotelista;
     }
     
+    Varasto varasto;
+    public TuotteetJSON(Varasto varasto){
+        this.varasto = varasto;
+    }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        Varasto varasto = Varasto.getInstance();
+        Varasto varasto = this.varasto;
         Tuotelista tuotteet = new Tuotelista();
         tuotteet.tuotelista = varasto.tuotteidenLista();
 

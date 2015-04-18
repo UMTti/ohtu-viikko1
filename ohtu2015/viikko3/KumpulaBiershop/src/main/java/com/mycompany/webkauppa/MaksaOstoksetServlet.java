@@ -5,6 +5,9 @@ import com.mycompany.webkauppa.ohjaus.KomentoTehdas;
 import com.mycompany.webkauppa.sovelluslogiikka.Ostoskori;
 import com.mycompany.webkauppa.ohjaus.OstoksenSuoritus;
 import com.mycompany.webkauppa.sovelluslogiikka.Tuote;
+import com.mycompany.webkauppa.sovelluslogiikka.Varasto;
+import com.mycompany.webkauppa.ulkoiset_rajapinnat.PankkiFasaadi;
+import com.mycompany.webkauppa.ulkoiset_rajapinnat.ToimitusjarjestelmaFasaadi;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -14,9 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 public class MaksaOstoksetServlet extends WebKauppaServlet {
 
     KomentoTehdas komennot;
+    PankkiFasaadi pankki;
+    ToimitusjarjestelmaFasaadi toimitusjarjestelma;
 
-    public MaksaOstoksetServlet(){
+    public MaksaOstoksetServlet(PankkiFasaadi pankki, ToimitusjarjestelmaFasaadi toimitusjarjestelma, Varasto varasto){
+        super(varasto);
         komennot = new KomentoTehdas();
+        this.pankki = pankki;
+        this.toimitusjarjestelma = toimitusjarjestelma;
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -46,7 +54,7 @@ public class MaksaOstoksetServlet extends WebKauppaServlet {
         request.setAttribute("osoite", osoite);
         request.setAttribute("hinta", ostoskori.hinta());
 
-        if (komennot.ostoksenSuoritus(nimi, osoite, luottokorttinumero, ostoskori).suorita()) {
+        if (komennot.ostoksenSuoritus(nimi, osoite, luottokorttinumero, ostoskori, pankki, toimitusjarjestelma, varasto).suorita()) {
             naytaSivu("/maksu_suoritettu.jsp", request, response);
         } else {
             naytaSivu("/maksu_epaonnistui.jsp", request, response);

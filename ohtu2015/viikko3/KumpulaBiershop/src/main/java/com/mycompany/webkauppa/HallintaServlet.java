@@ -1,5 +1,6 @@
 package com.mycompany.webkauppa;
 
+import com.mycompany.webkauppa.sovelluslogiikka.Varasto;
 import com.mycompany.webkauppa.ulkoiset_rajapinnat.PankkiFasaadi;
 import com.mycompany.webkauppa.ulkoiset_rajapinnat.ToimitusjarjestelmaFasaadi;
 import java.io.IOException;
@@ -8,13 +9,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class HallintaServlet extends WebKauppaServlet {
+    
+    PankkiFasaadi pankki;
+    ToimitusjarjestelmaFasaadi toimitusjarjestelma;
+    public HallintaServlet(PankkiFasaadi pankki, ToimitusjarjestelmaFasaadi toimitusjarjestelma, Varasto varasto){
+        super(varasto);
+        this.pankki = pankki;
+        this.toimitusjarjestelma = toimitusjarjestelma;
+    }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         request.setAttribute("tuotteet", varasto.tuotteidenLista());
-        request.setAttribute("maksut", PankkiFasaadi.getInstance().maksut());
-        request.setAttribute("toimitukset", ToimitusjarjestelmaFasaadi.getInstance().toimitukset());
+        request.setAttribute("maksut", pankki.maksut());
+        request.setAttribute("toimitukset", toimitusjarjestelma.toimitukset());
 
         naytaSivu("/hallinta.jsp", request, response);
     }

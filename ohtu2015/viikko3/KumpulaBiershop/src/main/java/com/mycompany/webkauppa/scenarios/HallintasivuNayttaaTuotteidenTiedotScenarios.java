@@ -10,8 +10,10 @@ import org.openqa.selenium.WebElement;
 
 public class HallintasivuNayttaaTuotteidenTiedotScenarios extends WebScenarioBase {
 
+    Varasto varasto;
     public HallintasivuNayttaaTuotteidenTiedotScenarios() {
         super(HallintasivuNayttaaTuotteidenTiedotScenarios.class);
+        this.varasto = new Varasto();
     }
 
     @Given("browser opened")
@@ -37,9 +39,9 @@ public class HallintasivuNayttaaTuotteidenTiedotScenarios extends WebScenarioBas
     public void whenYouHaveItemsInStock() {
         tuotteet = new ArrayList<Tuote>();
         
-        tuotteet.add( Varasto.getInstance().etsiTuote(1) ); 
-        tuotteet.add( Varasto.getInstance().etsiTuote(2) );
-        tuotteet.add( Varasto.getInstance().etsiTuote(3) );
+        tuotteet.add( varasto.etsiTuote(1) ); 
+        tuotteet.add( varasto.etsiTuote(2) );
+        tuotteet.add( varasto.etsiTuote(3) );
     }
 
     @Then("the price and saldo of items is correctly shown")

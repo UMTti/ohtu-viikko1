@@ -5,9 +5,9 @@ import com.mycompany.webkauppa.sovelluslogiikka.Tuote;
 import java.util.*;
 
 public class TuoteDAOInMemory extends TuoteDAO {
-    public static TuoteDAO getInMemoryDAO(){
+    /*public static TuoteDAO getInMemoryDAO(){
         return new TuoteDAOInMemory();
-    }
+    }*/
     
     private ArrayList<Tuote> tuotteet;
     private long id;

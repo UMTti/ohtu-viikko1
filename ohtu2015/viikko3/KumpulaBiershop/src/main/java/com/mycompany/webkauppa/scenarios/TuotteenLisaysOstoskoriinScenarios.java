@@ -10,8 +10,10 @@ import junit.framework.Assert;
 
 public class TuotteenLisaysOstoskoriinScenarios extends WebScenarioBase {
     
+    Varasto varasto;
     public TuotteenLisaysOstoskoriinScenarios() {
         super(TuotteenLisaysOstoskoriinScenarios.class);
+        this.varasto = new Varasto();
     }
     
     @Given("you are in tuotelista")
@@ -68,7 +70,7 @@ public class TuotteenLisaysOstoskoriinScenarios extends WebScenarioBase {
     }
     
     private int etsiTuotteenHinta(String item) {
-        Varasto varasto = Varasto.getInstance();
+        Varasto varasto = this.varasto;
         
         for (Tuote tuote : varasto.tuotteidenLista()) {
             if (tuote.getNimi().equals(item)) {

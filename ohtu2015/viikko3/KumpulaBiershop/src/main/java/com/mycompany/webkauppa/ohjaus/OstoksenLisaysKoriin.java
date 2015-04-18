@@ -10,10 +10,10 @@ public class OstoksenLisaysKoriin implements Komento {
     private long tuoteId;
     private Varasto varasto;
 
-    public OstoksenLisaysKoriin(Ostoskori ostoskori, long tuoteId) {
+    public OstoksenLisaysKoriin(Ostoskori ostoskori, long tuoteId, Varasto varasto) {
         this.ostoskori = ostoskori;
         this.tuoteId = tuoteId;
-        this.varasto = Varasto.getInstance();
+        this.varasto = varasto;
     }
 
     public boolean suorita() {

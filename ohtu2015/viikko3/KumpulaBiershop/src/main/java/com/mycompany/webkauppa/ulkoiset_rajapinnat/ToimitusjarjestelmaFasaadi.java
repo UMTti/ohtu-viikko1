@@ -7,13 +7,13 @@ public class ToimitusjarjestelmaFasaadi {
 
     private static ToimitusjarjestelmaFasaadi instance;
 
-    public static ToimitusjarjestelmaFasaadi getInstance() {
+    /*public static ToimitusjarjestelmaFasaadi getInstance() {
         if (instance == null) {
             instance = new ToimitusjarjestelmaFasaadi();
         }
 
         return instance;
-    }
+    }*/
     private ArrayList<String> toimitukset;
 
     public ToimitusjarjestelmaFasaadi() {
